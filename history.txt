@@ -1,0 +1,36 @@
+
+Todo:
+- Add help text
+- Remove salary from investments calculator?
+- Use same stored variables across pages
+- Re-enable retirement income calculation. Maybe replace income graph?
+
+1.4[WIP]
+- Added new safe withdrawal amount figure.
+
+1.3
+- fixed footer markup
+- Ads removed (Rejected due to not enough content!!!)
+- Fixed bug with labels
+- Make kiwisaver contribution rate a dropdown
+- Make kiwisaver rate or return into dropdown
+- Fix kiwisaver employer contribution rate
+- Fixed up year labels
+- Improve graph colours
+- Added fullstops to kiwisaver
+
+1.2
+- Add link to kiwisaver
+- Added title and description to KiwiSaver
+- Renamed the investments calculator to 'Savings'
+- Fixed screen width on mobile
+
+1.1
+- Reduce defaults
+- Hide withdrawal stuff
+- Change kiwisaver years to age
+- Fix kiwisaver charts
+
+1.0
+- Initial release
+

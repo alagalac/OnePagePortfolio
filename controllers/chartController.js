@@ -9,12 +9,16 @@ angular.module('OnePagePortfolio.controllers').controller('chartController',
                 return value;
             }
         },
-        chartPadding: 20
+        chartPadding: 20,
+        showArea: true,
+        low: 0
+        
     };
     
     this.ResponsiveOptions = [
         ['screen and (min-width: 1025px)', {
             showPoint: false,
+            showLine: false,
             height: '300px',
             axisX: {
                 labelInterpolationFnc: function(value, index) {
@@ -24,6 +28,7 @@ angular.module('OnePagePortfolio.controllers').controller('chartController',
         }],
         ['screen and (min-width: 641px) and (max-width: 1024px)', {
             showPoint: false,
+            showLine: false,
             height: '300px',
             axisX: {
                 labelInterpolationFnc: function(value, index) {
@@ -33,6 +38,7 @@ angular.module('OnePagePortfolio.controllers').controller('chartController',
         }],
         ['screen and (max-width: 640px)', {
             showPoint: false,
+            showLine: false,
             height: '200px',
             axisX: {
                 labelInterpolationFnc: function(value, index) {

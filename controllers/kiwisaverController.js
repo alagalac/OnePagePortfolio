@@ -26,6 +26,10 @@ angular.module('OnePagePortfolio.controllers').controller('kiwisaverController',
         for (var i = 0; i <= kiwisaver.GetTimeframe(); i++)
         {
             $scope.valuationData.labels.push(i);
+        }
+        
+        for (var i = 1; i <= kiwisaver.GetTimeframe() + 1; i++)
+        {
             $scope.incomeData.labels.push(i);
         }
         
@@ -33,22 +37,39 @@ angular.module('OnePagePortfolio.controllers').controller('kiwisaverController',
         {
             this.ReturnYears.push(i);
         }
-        
-        this.updateData();
     }
     
     this.updateData = function()
     {
         $scope.valuationData.series = [];
-        $scope.valuationData.series.push(kiwisaver.GetPersonalContributionsValue());
-        $scope.valuationData.series.push(kiwisaver.GetEmployerContributionsValue());
-        $scope.valuationData.series.push(kiwisaver.GetGovernmentContributionsValue());
+        
+        
+        var personal = kiwisaver.GetPersonalContributionsValue();
+        var employer = kiwisaver.GetEmployerContributionsValue();
+        var government = kiwisaver.GetGovernmentContributionsValue()
+        
         $scope.valuationData.series.push(kiwisaver.GetTotalValue());
+        $scope.valuationData.series.push(this.SumArrays(this.SumArrays(personal, employer), government));
+        $scope.valuationData.series.push(this.SumArrays(personal, employer));
+        $scope.valuationData.series.push(kiwisaver.GetPersonalContributionsValue());
+        
         
         $scope.incomeData.series = [];
         $scope.incomeData.series.push(kiwisaver.GetInvestmentEarnings());
 
+        this.updateLabels();
         this.saveConfiguration();
+    }
+    
+    this.SumArrays = function(arr1, arr2)
+    {
+        var ret = [];
+        for (var i = 0; i < arr1.length; i++)
+        {
+            ret.push(arr1[i] + arr2[i]);
+        }
+        
+        return ret;
     }
     
     
@@ -83,7 +104,7 @@ angular.module('OnePagePortfolio.controllers').controller('kiwisaverController',
     this.loadConfiguration();
     
     // To show the initial data
-    this.updateLabels();
+    this.updateData();
 
 
 }]);

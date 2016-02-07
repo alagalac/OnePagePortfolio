@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('OnePagePortfolio.services').service('investments', function() {
-    this.Salary = 50000;
+    this.Salary = 30000;
     this.MonthlySavings = 1000;
     this.Timeframe = 25; // in years
     this.Return = 5; // in %, real.
-    this.CurrentValuation = 25000;
+    this.CurrentValuation = 5000;
     
     this.SafeWithdrawalRate = 4; // in %
     
@@ -111,9 +111,9 @@ angular.module('OnePagePortfolio.services').service('investments', function() {
     {
         var ret = [];
         
-        ret.push(0);
+        var totalContributions = this.CurrentValuation;
         
-        var totalContributions = 0;
+        ret.push(totalContributions)
         
         // for each year
         for (var i = 1; i <= this.Timeframe; i++){
@@ -142,5 +142,13 @@ angular.module('OnePagePortfolio.services').service('investments', function() {
         }
         
         return fi;
-    }    
+    }
+    
+    this.GetIndefiniteWithdrawalFigure = function()
+    {
+
+        var portfolioValue = this.GetTotalValue();
+        
+        return portfolioValue[this.Timeframe - 1] * (this.SafeWithdrawalRate / 100)
+    }  
 })

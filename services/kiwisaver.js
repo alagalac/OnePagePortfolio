@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('OnePagePortfolio.services', []).service('kiwisaver', function() {
-    this.Salary = 50000;
-    this.Age = 15;
+    this.Salary = 30000;
+    this.Age = 25;
     this.ContributionRate = 4; // in %
     this.Return = 5; // in %, real.
-    this.CurrentValuation = 25000;
+    this.CurrentValuation = 5000;
     
     // constants. Shouldn't probably change
     this.RetirementAge = 65;
@@ -79,13 +79,32 @@ angular.module('OnePagePortfolio.services', []).service('kiwisaver', function() 
     {
         var ret = [];
         
+        var taxRate = this.GetESCTRate()
+        
         // for each year
         for (var i = 0; i <= this.GetTimeframe(); i++){
-            var newContributions = this.Salary * (this.EmployerContributionRate / 100);
+            var newContributions = this.Salary * (this.EmployerContributionRate / 100) * (1 - (taxRate / 100));
             ret.push(newContributions);
         }
         
         return ret;
+    }
+    
+    this.GetESCTRate = function()
+    {
+        if (this.Salary < 16800)
+        {
+            return 10.5;
+        }
+        else if (this.Salary < 57600)
+        {
+            return 17.5;
+        }
+        else if (this.Salary < 84000)
+        {
+            return 30;
+        }
+        return 33;
     }
     
     this.GetGovernmentContributions = function()
@@ -131,9 +150,11 @@ angular.module('OnePagePortfolio.services', []).service('kiwisaver', function() 
     {
         var ret = [];
         
-        ret.push(0);
         
-        var totalContributions = 0;
+        
+        var totalContributions = this.CurrentValuation;
+        
+        ret.push(totalContributions);
         
         // for each year
         for (var i = 1; i <= this.GetTimeframe(); i++){

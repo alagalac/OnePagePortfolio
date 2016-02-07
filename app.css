@@ -1,27 +1,22 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,600,500,300,200,100);
 
 html{
-    background-color: #fbfbfb;
-}
-
-body{
-    background-color: #fbfbfb;
-    margin: 0;
-    font-family: 'Open Sans', 'Droid Sans', Arial, sans-serif;
+    background-color: #eee;
 }
 
 .content{
     width: 100%; 
     margin: 0 auto;
     background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    padding: 5px;
+    font-family: 'Open Sans', 'Droid Sans', Arial, sans-serif;
 }
 
 @media screen and (min-width: 950px) {
    .content {
       width: 950px;
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      padding: 15px;
    }
 }
 
@@ -32,13 +27,20 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-weight: 100;
+    font-family: Raleway,"Droid Sans",Arial,sans-serif;
+    font-size: 48px;
+    text-align: center;
+}
+
 input.inlineText {
     background: none;
     border: 0;
     width: auto;
     font-size: 1em;
     border-bottom: 1px dashed #666;
-    width: 4em;
+    width: 3.5em;
 }
 
 input.inlineText:focus {
@@ -48,6 +50,13 @@ input.inlineText:focus {
 
 input.inlineText.shortNumber {
     width: 1.25em;
+}
+
+select {
+    outline:none;
+    border:none;
+    border-bottom: 1px dashed #666;
+    font-size: 1em;
 }
 
 p.inlineParagraph {
@@ -71,12 +80,14 @@ div.wrapper section {
     
 }
 
-table {
+br {
     clear:both;
+}
+
+table {
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
     width: 640px; 
-    border-collapse: collapse;
     border-spacing: 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     margin: 0 auto;
@@ -132,34 +143,31 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+.ct-chart .ct-area {
+  fill-opacity: 1
+}
 
 .ct-series-a-key
 {
-    background: #d70206;
+    background: #1496BB;
 }
 
 .ct-series-b-key
 {
-    background: #59922b;
+    background: #A3B86C;
 }
 
 .ct-series-c-key
 {
-    background: #f4c63d;
+    background: #EDAA38;
 }
 
 .ct-series-d-key
 {
-    background: #6188e2;
+    background: #F26D21;
 }
 
-dt{
-    margin-left: 1em;
-    display: inline;
-}
-
-dd {
-    margin-left: 0;
+li {
     display: inline;
 }
 
@@ -168,3 +176,8 @@ footer {
     color: #888;
     text-align: center;
 }
+
+.links a {
+    color: #333;
+}
+

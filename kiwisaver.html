@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KiwiSaverCalculator</title>
+    <title>KiwiSaver - One Page Portfolio</title>
+    <meta name="description" content="Project the future value of your KiwiSaver on one page">
     
     <link rel="stylesheet" href="chartist.min.css">
     <link rel="stylesheet" type="text/css" href="app.css">
@@ -26,49 +27,55 @@
                 I am
                 <input class="inlineText shortNumber" type="number" name="age" maxlength="2" ng-model="data.Age" ng-change="kiwisaver.updateData()"/> 
                 years old, and my salary is $
-                <input class="inlineText" type="number" name="salary" maxlength="7" ng-model="data.Salary" ng-change="kiwisaver.updateData()"/>
+                <input class="inlineText" type="number" name="salary" maxlength="7" ng-model="data.Salary" ng-change="kiwisaver.updateData()"/>.
             </p>
             <p class="inlineParagraph">
                 I contribute
-                <input class="inlineText shortNumber" type="number" name="contributionRate" maxlength="7" ng-model="data.ContributionRate" ng-change="kiwisaver.updateData()"/>% 
-                to my KiwiSaver, which is invested at 
-                <input class="inlineText shortNumber" type="number" name="return" maxlength="2" ng-model="data.Return" ng-change="kiwisaver.updateData()"/>% 
-                p.a.
+                <select ng-model="data.ContributionRate" ng-change="kiwisaver.updateData()" convert-to-number>
+                    <option value="3">3%</option>
+                    <option value="4">4%</option>
+                    <option value="8">8%</option>
+                </select>
+                <!--<input class="inlineText shortNumber" type="number" name="contributionRate" maxlength="7" ng-model="data.ContributionRate" ng-change="kiwisaver.updateData()"/>% -->
+                to my KiwiSaver, which is invested in a 
+                <select ng-model="data.Return" ng-change="kiwisaver.updateData()" convert-to-number>
+                    <option value="3">Conservative</option>
+                    <option value="5">Balanced</option>
+                    <option value="7">Growth</option>
+                </select> 
+                Fund.
+                <!--<input class="inlineText shortNumber" type="number" name="return" maxlength="2" ng-model="data.Return" ng-change="kiwisaver.updateData()"/>% p.a.-->
             </p>
             <p class="inlineParagraph">
                 The current balance of my KiwiSaver account is $
-                <input class="inlineText" type="number" name="currentValuation" maxlength="7" ng-model="data.CurrentValuation" ng-change="kiwisaver.updateData()"/> 
+                <input class="inlineText" type="number" name="currentValuation" maxlength="7" ng-model="data.CurrentValuation" ng-change="kiwisaver.updateData()"/>.
             </p>
         </section>
         <div ng-controller="chartController as Chartist" class="wrapper">
             <section id="valuationChart">
-                <h3>Valuation Chart</h3>
+                <h3>Portfolio Value</h3>
                 <chartist class="ct-chart" chartist-data="$parent.valuationData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <dl>
-                    <dt class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Personal Contributions</dd>
-                    <dt class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Employer Contributions</dd>
-                    <dt class="key ct-series-c-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Government Contributions</dd>
-                    <dt class="key ct-series-d-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Total Value</dd>
-                </dl>
+                <ul>
+                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Investment Earnings</li>
+                    <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Government Contributions</dd>
+                    <li><span class="key ct-series-c-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Employer Contributions</dd>
+                    <li><span class="key ct-series-d-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Personal Contributions</li>
+                </ul>
             </section>
             <section id="incomeChart">
-                <h3>Income Chart</h3>
+                <h3>Portfolio Income</h3>
                 <chartist class="ct-chart" chartist-data="$parent.incomeData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <dl>
-                    <dt class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Investment Earnings</dd>
-                </dl>
+                <ul>
+                    
+                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Investment Earnings</li>
+                </ul>
             </section>
         </div>
         
         <table>
             <thead>
                 <tr>
-                    <th>Year</th>
+                    <th>Age</th>
                     <th class="hideable">Opening Balance</th>
                     <th class="hideable">Personal Contributions</th>
                     <th class="hideable">Employer Contributions</th>
@@ -79,7 +86,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="i in kiwisaver.ReturnYears">
-                    <td>{{i}}</td>
+                    <td>{{i + data.Age}}</td>
                     <td class="hideable">{{data.GetTotalValue()[i - 1] | currency}}</td>
                     <td class="hideable">{{data.GetPersonalContributions()[i - 1] | currency}}</td>
                     <td class="hideable">{{data.GetEmployerContributions()[i - 1] | currency}}</td>
@@ -92,7 +99,10 @@
     </div>
     <hr/>
     <footer>
-        © 2016 - Jason. Please note that all data is approximate.
-    </footer
+        <div class="links">
+            <a href="/">Savings Calculator</a> | <a href="/kiwisaver.html">KiwiSaver Calculator</a>    
+        </div>
+        © 2016. Please note that all data is estimated only. Actual returns will vary with market fluctuations.
+    </footer>
 </body>
 </html>

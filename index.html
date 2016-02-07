@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnePagePortfolio</title>
+    <title>Savings - One Page Portfolio</title>
+    <meta name="description" content="Project the future value of your Savings on one page">
     
     <link rel="stylesheet" href="chartist.min.css">
     <link rel="stylesheet" type="text/css" href="app.css">
@@ -15,65 +16,72 @@
     <script type="text/javascript" src="services/investments.js"></script>
     <script type="text/javascript" src="controllers/chartController.js"></script>
     <script type="text/javascript" src="controllers/investmentsController.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-73234908-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 </head>
 <body class="content" ng-app="OnePagePortfolio">
-    <h1>One Page Portfolio</h1>
+    <h1>Savings Calculator</h1>
     <div ng-controller="investmentsController as investments">
         <section id="settings">
             <p class="inlineParagraph">
                 I currently have $
                 <input class="inlineText" type="number" name="currentValuation" maxlength="7" ng-model="data.CurrentValuation" ng-change="investments.updateData()"/> 
-                invested at a real rate of return of 
+                and I save $
+                <input class="inlineText" type="number" name="monthlySavings" maxlength="7" ng-model="data.MonthlySavings" ng-change="investments.updateData()"/>
+                per month.
+                
+            </p>
+            <p class="inlineParagraph">
+                It is invested at a real rate of return of 
                 <input class="inlineText shortNumber" type="number" name="return" maxlength="2" ng-model="data.Return" ng-change="investments.updateData()"/>% 
                 p.a. over 
                 <input class="inlineText shortNumber" type="number" name="timeframe" maxlength="2" ng-model="data.Timeframe" ng-change="investments.updateLabels()"/> 
                 years.
             </p>
-            <p class="inlineParagraph">
-                My salary is $
-                <input class="inlineText" type="number" name="salary" maxlength="7" ng-model="data.Salary" ng-change="Charinvestmentstist.updateData()"/> 
-                and I save $
-                <input class="inlineText" type="number" name="monthlySavings" maxlength="7" ng-model="data.MonthlySavings" ng-change="investments.updateData()"/>
-                per month.
-            </p>
-            <p class="inlineParagraph">
-                With a SWR of 
+            <p class="inlineParagraph" ng-show="false">
+                With a withdrawal rate of 
                 <input class="inlineText shortNumber" type="number" name="swr" maxlength="2" ng-model="data.SafeWithdrawalRate"  ng-change="investments.updateData()"/>% 
-                I can retire in {{investments.FinanciallyIndependent}} years time.
+                I could retire in about {{investments.FinanciallyIndependent}} years time.
+            </p>
+            <p class="inlineParagraph" ng-show="true">
+                After {{data.Timeframe}} years, I could safely withdraw {{investments.IndefiniteWithdrawal | currency}} p.a. indefinitely.
             </p>
         </section>
+        
         <div ng-controller="chartController as Chartist" class="wrapper">
             <section id="valuationChart">
-                <h3>Valuation Chart</h3>
+                <h3>Portfolio Value</h3>
                 <chartist class="ct-chart" chartist-data="$parent.valuationData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <dl>
-                    <dt class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Total Contributions</dd>
-                    <dt class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Portfolio Value</dd>
-                </dl>
+                <ul>
+                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Investment Earnings</li>
+                    <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Contributions</li>
+                </ul>
             </section>
             <section id="incomeChart">
-                <h3>Income Chart</h3>
+                <h3>Portfolio Income</h3>
                 <chartist class="ct-chart" chartist-data="$parent.incomeData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <dl>
-                    <dt class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Salary</dd>
-                    <dt class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Investment Earnings</dd>
-                    <dt class="key ct-series-c-key">&nbsp;&nbsp;&nbsp;&nbsp;</dt>
-                    <dd>Total Income</dd>
-                </dl>
+                <ul>
+                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Investment Earnings</dd>
+                    <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Salary</dd>
+                </ul>
             </section>
         </div>
-        
+        <br/>
         <table>
             <thead>
                 <tr>
                     <th>Year</th>
                     <th class="hideable">Opening Balance</th>
                     <th class="hideable">Contributions</th>
-                    <th class="hideable">Investment earnings</th>
+                    <th class="hideable">Investment Earnings</th>
                     <th>Closing Balance</th>
                 </tr>
             </thead>
@@ -89,8 +97,13 @@
         </table>
     </div>
     <hr/>
+    
     <footer>
-        © 2016 - Jason. Please note that all data is approximate.
-    </footer
+        <div class="links">
+            <a href="/">Savings Calculator</a> | <a href="/kiwisaver.html">KiwiSaver Calculator</a>    
+        </div>
+        © 2016. Please note that all data is estimated only. Actual returns will vary with market fluctuations.
+        A safe withdrawal rate of 4% is assumed. It is assumed that all figures are provided exclude infaltion, and include tax.
+    </footer>
 </body>
 </html>

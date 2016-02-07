@@ -15,6 +15,7 @@ angular.module('OnePagePortfolio.controllers').controller('investmentsController
     };
     
     this.FinanciallyIndependent = 0; // in years
+    this.IndefiniteWithdrawal = 0;
     
     $scope.data = investments;
     
@@ -28,6 +29,10 @@ angular.module('OnePagePortfolio.controllers').controller('investmentsController
         for (var i = 0; i <= investments.Timeframe; i++)
         {
             $scope.valuationData.labels.push(i);
+        }
+        
+        for (var i = 1; i <= investments.Timeframe + 1; i++)
+        {
             $scope.incomeData.labels.push(i);
         }
         
@@ -35,20 +40,20 @@ angular.module('OnePagePortfolio.controllers').controller('investmentsController
         {
             this.ReturnYears.push(i);
         }
-        
-        this.updateData();
     }
     
     this.updateData = function()
     {
         $scope.valuationData.series = [];
-        $scope.valuationData.series.push(investments.GetContributionsValue());
         $scope.valuationData.series.push(investments.GetTotalValue());
+        $scope.valuationData.series.push(investments.GetContributionsValue());
+        
         
         $scope.incomeData.series = [];
-        $scope.incomeData.series.push(investments.GetSalaryIncome());
-        $scope.incomeData.series.push(investments.GetInvestmentEarnings());
         $scope.incomeData.series.push(investments.GetTotalIncome());
+        $scope.incomeData.series.push(investments.GetSalaryIncome());
+        //$scope.incomeData.series.push(investments.GetInvestmentEarnings());
+        
         
         this.FinanciallyIndependent = investments.GetYearsUntilFinanciallyIndependent();
         if (this.FinanciallyIndependent === -1)
@@ -56,6 +61,9 @@ angular.module('OnePagePortfolio.controllers').controller('investmentsController
             this.FinanciallyIndependent = '∞';
         }
         
+        this.IndefiniteWithdrawal = investments.GetIndefiniteWithdrawalFigure();
+        
+        this.updateLabels();
         this.saveConfiguration();
     }
     
@@ -92,7 +100,7 @@ angular.module('OnePagePortfolio.controllers').controller('investmentsController
     this.loadConfiguration();
     
     // To show the initial data
-    this.updateLabels();
+    this.updateData();
 
 
 }]);
