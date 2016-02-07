@@ -37,7 +37,6 @@
                 and I save $
                 <input class="inlineText" type="number" name="monthlySavings" maxlength="7" ng-model="data.MonthlySavings" ng-change="investments.updateData()"/>
                 per month.
-                
             </p>
             <p class="inlineParagraph">
                 It is invested at a real rate of return of 
@@ -57,22 +56,12 @@
         </section>
         
         <div ng-controller="chartController as Chartist" class="wrapper">
-            <section id="valuationChart">
-                <h3>Portfolio Value</h3>
-                <chartist class="ct-chart" chartist-data="$parent.valuationData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <ul>
-                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Investment Earnings</li>
-                    <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Contributions</li>
-                </ul>
-            </section>
-            <section id="incomeChart">
-                <h3>Portfolio Income</h3>
-                <chartist class="ct-chart" chartist-data="$parent.incomeData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
-                <ul>
-                    <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Investment Earnings</dd>
-                    <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Salary</dd>
-                </ul>
-            </section>
+            <h3>Portfolio Value</h3>
+            <chartist class="ct-chart" chartist-data="$parent.valuationData" chartist-chart-type="Line" chartist-chart-options="Chartist.Options" chartist-responsive-options="Chartist.ResponsiveOptions"></chartist>
+            <ul>
+                <li><span class="key ct-series-a-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Investment Earnings</li>
+                <li><span class="key ct-series-b-key">&nbsp;&nbsp;&nbsp;&nbsp;</span>Total Contributions</li>
+            </ul>
         </div>
         <br/>
         <table>
