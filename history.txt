@@ -1,12 +1,15 @@
 
 Todo:
 - Add help text
-- Remove salary from investments calculator?
-- Use same stored variables across pages
-- Re-enable retirement income calculation. Maybe replace income graph?
+- Use same stored variables across pages.
+- Fix graph not hanging with timeframe.
+- Improve performance by caching more values.
 
 1.4[WIP]
-- Added new safe withdrawal amount figure.
+- Added new safe withdrawal amount figure for retirement income.
+- Remove salary from investments calculator, and remove income graph.
+- Added assumpions to footer.
+- Fix grey space above title in mobile mode.
 
 1.3
 - fixed footer markup
